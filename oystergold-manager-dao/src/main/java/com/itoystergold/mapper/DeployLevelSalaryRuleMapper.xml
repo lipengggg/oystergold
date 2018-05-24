@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.DeployLevelSalaryRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.DeployLevelSalaryRule" >
+    <id column="rid" property="rid" jdbcType="VARCHAR" />
+    <result column="levelid" property="levelid" jdbcType="VARCHAR" />
+    <result column="introduce_rate" property="introduceRate" jdbcType="DECIMAL" />
+    <result column="manage_rate" property="manageRate" jdbcType="DECIMAL" />
+    <result column="service_amt" property="serviceAmt" jdbcType="DECIMAL" />
+    <result column="subsidy_amt" property="subsidyAmt" jdbcType="DECIMAL" />
+    <result column="share_rate" property="shareRate" jdbcType="DECIMAL" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rid, levelid, introduce_rate, manage_rate, service_amt, subsidy_amt, share_rate, 
+    createtime, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.DeployLevelSalaryRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deploy_level_salary_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from deploy_level_salary_rule
+    where rid = #{rid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from deploy_level_salary_rule
+    where rid = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.DeployLevelSalaryRuleExample" >
+    delete from deploy_level_salary_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.DeployLevelSalaryRule" >
+    insert into deploy_level_salary_rule (rid, levelid, introduce_rate, 
+      manage_rate, service_amt, subsidy_amt, 
+      share_rate, createtime, updatetime
+      )
+    values (#{rid,jdbcType=VARCHAR}, #{levelid,jdbcType=VARCHAR}, #{introduceRate,jdbcType=DECIMAL}, 
+      #{manageRate,jdbcType=DECIMAL}, #{serviceAmt,jdbcType=DECIMAL}, #{subsidyAmt,jdbcType=DECIMAL}, 
+      #{shareRate,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.DeployLevelSalaryRule" >
+    insert into deploy_level_salary_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="levelid != null" >
+        levelid,
+      </if>
+      <if test="introduceRate != null" >
+        introduce_rate,
+      </if>
+      <if test="manageRate != null" >
+        manage_rate,
+      </if>
+      <if test="serviceAmt != null" >
+        service_amt,
+      </if>
+      <if test="subsidyAmt != null" >
+        subsidy_amt,
+      </if>
+      <if test="shareRate != null" >
+        share_rate,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="levelid != null" >
+        #{levelid,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceRate != null" >
+        #{introduceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="manageRate != null" >
+        #{manageRate,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceAmt != null" >
+        #{serviceAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="subsidyAmt != null" >
+        #{subsidyAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="shareRate != null" >
+        #{shareRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.DeployLevelSalaryRuleExample" resultType="java.lang.Integer" >
+    select count(*) from deploy_level_salary_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deploy_level_salary_rule
+    <set >
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levelid != null" >
+        levelid = #{record.levelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduceRate != null" >
+        introduce_rate = #{record.introduceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.manageRate != null" >
+        manage_rate = #{record.manageRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serviceAmt != null" >
+        service_amt = #{record.serviceAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.subsidyAmt != null" >
+        subsidy_amt = #{record.subsidyAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shareRate != null" >
+        share_rate = #{record.shareRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deploy_level_salary_rule
+    set rid = #{record.rid,jdbcType=VARCHAR},
+      levelid = #{record.levelid,jdbcType=VARCHAR},
+      introduce_rate = #{record.introduceRate,jdbcType=DECIMAL},
+      manage_rate = #{record.manageRate,jdbcType=DECIMAL},
+      service_amt = #{record.serviceAmt,jdbcType=DECIMAL},
+      subsidy_amt = #{record.subsidyAmt,jdbcType=DECIMAL},
+      share_rate = #{record.shareRate,jdbcType=DECIMAL},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.DeployLevelSalaryRule" >
+    update deploy_level_salary_rule
+    <set >
+      <if test="levelid != null" >
+        levelid = #{levelid,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceRate != null" >
+        introduce_rate = #{introduceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="manageRate != null" >
+        manage_rate = #{manageRate,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceAmt != null" >
+        service_amt = #{serviceAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="subsidyAmt != null" >
+        subsidy_amt = #{subsidyAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="shareRate != null" >
+        share_rate = #{shareRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.DeployLevelSalaryRule" >
+    update deploy_level_salary_rule
+    set levelid = #{levelid,jdbcType=VARCHAR},
+      introduce_rate = #{introduceRate,jdbcType=DECIMAL},
+      manage_rate = #{manageRate,jdbcType=DECIMAL},
+      service_amt = #{serviceAmt,jdbcType=DECIMAL},
+      subsidy_amt = #{subsidyAmt,jdbcType=DECIMAL},
+      share_rate = #{shareRate,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+</mapper>

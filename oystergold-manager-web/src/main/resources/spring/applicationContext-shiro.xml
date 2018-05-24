@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	
+	<!-- 
+	1.	创建shiro过滤器工厂，shiroFilterFactoryBean
+		a)	注入securityManager对象
+		b)	注入其他参数
+	2.	创建SecurityManager
+		a)	注入realm
+	3.	创建realm对象
+		a)	注入凭证匹配器
+		作用： 对用户输入的密码，按照指定的算法进行加密，如md5加密。
+	4.	创建凭证匹配器
+		a)	指定加密的算法
+	 -->	
+	 
+	<!-- 1.	创建shiro过滤器工厂，shiroFilterFactoryBean -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- a)	注入securityManager对象 -->
+    	<property name="securityManager" ref="securityManager"/>
+    	<!-- b)	注入其他参数 -->
+    	<!-- b1)shiro认证失败后，跳转到的认证页面 -->
+    	<property name="loginUrl" value="/login.jsp"/>  
+    	<!-- b)shiro认证成功后，跳转到的页面 
+	    <property name="successUrl" value="/index.jsp"/> -->
+	    <!-- c)shiro授权校验失败后，跳转到的页面 
+	    <property name="unauthorizedUrl" value="/unauthorized.jsp"/> -->
+	   
+	    <!-- 对指定的资源，应用shiro提供的哪些过滤器： anon匿名访问过滤器，会直接放行资源 -->
+	    <!-- authc 认证过滤器;  perms 授权校验过滤器 -->
+	    <property name="filterChainDefinitions">
+	        <value>
+	            /index.jsp* = anon
+	        </value>
+    	</property>
+    </bean>
+    
+	<!-- 2.	创建SecurityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    	<property name="userRealm" ref="userRealm"/>
+    </bean>
+    
+    <!-- 3.	创建realm对象 -->
+    <bean id="userRealm" class="com.itoystergold.shiro.realm.UserRealm">
+    	<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+    </bean>
+    
+    <!-- 4. 创建凭证匹配器（自动对realm中的密码，就是用户输入的密码进行加密） -->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    	<property name="hashAlgorithmName" value="md5"></property>
+    </bean>
+</beans>

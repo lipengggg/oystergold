@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.DeploySubbankMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.DeploySubbank" >
+    <id column="SUB_NO" property="subNo" jdbcType="VARCHAR" />
+    <id column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="CLSBANK_NO" property="clsbankNo" jdbcType="VARCHAR" />
+    <result column="SUB_NAME" property="subName" jdbcType="VARCHAR" />
+    <result column="SUB_SHORTNAME" property="subShortname" jdbcType="VARCHAR" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SUB_NO, TENANT_ID, CLSBANK_NO, SUB_NAME, SUB_SHORTNAME, CITY_CODE, STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.DeploySubbankExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deploy_subbank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.DeploySubbankKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from deploy_subbank
+    where SUB_NO = #{subNo,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.itoystergold.pojo.DeploySubbankKey" >
+    delete from deploy_subbank
+    where SUB_NO = #{subNo,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.DeploySubbankExample" >
+    delete from deploy_subbank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.DeploySubbank" >
+    insert into deploy_subbank (SUB_NO, TENANT_ID, CLSBANK_NO, 
+      SUB_NAME, SUB_SHORTNAME, CITY_CODE, 
+      STATUS)
+    values (#{subNo,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{clsbankNo,jdbcType=VARCHAR}, 
+      #{subName,jdbcType=VARCHAR}, #{subShortname,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.DeploySubbank" >
+    insert into deploy_subbank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subNo != null" >
+        SUB_NO,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="clsbankNo != null" >
+        CLSBANK_NO,
+      </if>
+      <if test="subName != null" >
+        SUB_NAME,
+      </if>
+      <if test="subShortname != null" >
+        SUB_SHORTNAME,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subNo != null" >
+        #{subNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="clsbankNo != null" >
+        #{clsbankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subName != null" >
+        #{subName,jdbcType=VARCHAR},
+      </if>
+      <if test="subShortname != null" >
+        #{subShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.DeploySubbankExample" resultType="java.lang.Integer" >
+    select count(*) from deploy_subbank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deploy_subbank
+    <set >
+      <if test="record.subNo != null" >
+        SUB_NO = #{record.subNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clsbankNo != null" >
+        CLSBANK_NO = #{record.clsbankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subName != null" >
+        SUB_NAME = #{record.subName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subShortname != null" >
+        SUB_SHORTNAME = #{record.subShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deploy_subbank
+    set SUB_NO = #{record.subNo,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      CLSBANK_NO = #{record.clsbankNo,jdbcType=VARCHAR},
+      SUB_NAME = #{record.subName,jdbcType=VARCHAR},
+      SUB_SHORTNAME = #{record.subShortname,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.DeploySubbank" >
+    update deploy_subbank
+    <set >
+      <if test="clsbankNo != null" >
+        CLSBANK_NO = #{clsbankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subName != null" >
+        SUB_NAME = #{subName,jdbcType=VARCHAR},
+      </if>
+      <if test="subShortname != null" >
+        SUB_SHORTNAME = #{subShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where SUB_NO = #{subNo,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.DeploySubbank" >
+    update deploy_subbank
+    set CLSBANK_NO = #{clsbankNo,jdbcType=VARCHAR},
+      SUB_NAME = #{subName,jdbcType=VARCHAR},
+      SUB_SHORTNAME = #{subShortname,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR}
+    where SUB_NO = #{subNo,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </update>
+</mapper>

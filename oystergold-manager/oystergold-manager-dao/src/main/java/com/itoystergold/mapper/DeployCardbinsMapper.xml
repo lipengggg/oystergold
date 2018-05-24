@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.DeployCardbinsMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.DeployCardbins" >
+    <id column="BIN_ID" property="binId" jdbcType="VARCHAR" />
+    <id column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="BANK_ID" property="bankId" jdbcType="VARCHAR" />
+    <result column="CARDBIN" property="cardbin" jdbcType="VARCHAR" />
+    <result column="CARD_LENGTH" property="cardLength" jdbcType="VARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BIN_ID, TENANT_ID, BANK_ID, CARDBIN, CARD_LENGTH, MEMO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.DeployCardbinsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deploy_cardbins
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.DeployCardbinsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from deploy_cardbins
+    where BIN_ID = #{binId,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.itoystergold.pojo.DeployCardbinsKey" >
+    delete from deploy_cardbins
+    where BIN_ID = #{binId,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.DeployCardbinsExample" >
+    delete from deploy_cardbins
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.DeployCardbins" >
+    insert into deploy_cardbins (BIN_ID, TENANT_ID, BANK_ID, 
+      CARDBIN, CARD_LENGTH, MEMO
+      )
+    values (#{binId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, 
+      #{cardbin,jdbcType=VARCHAR}, #{cardLength,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.DeployCardbins" >
+    insert into deploy_cardbins
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="binId != null" >
+        BIN_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="cardbin != null" >
+        CARDBIN,
+      </if>
+      <if test="cardLength != null" >
+        CARD_LENGTH,
+      </if>
+      <if test="memo != null" >
+        MEMO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="binId != null" >
+        #{binId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardbin != null" >
+        #{cardbin,jdbcType=VARCHAR},
+      </if>
+      <if test="cardLength != null" >
+        #{cardLength,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.DeployCardbinsExample" resultType="java.lang.Integer" >
+    select count(*) from deploy_cardbins
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deploy_cardbins
+    <set >
+      <if test="record.binId != null" >
+        BIN_ID = #{record.binId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankId != null" >
+        BANK_ID = #{record.bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardbin != null" >
+        CARDBIN = #{record.cardbin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardLength != null" >
+        CARD_LENGTH = #{record.cardLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deploy_cardbins
+    set BIN_ID = #{record.binId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      BANK_ID = #{record.bankId,jdbcType=VARCHAR},
+      CARDBIN = #{record.cardbin,jdbcType=VARCHAR},
+      CARD_LENGTH = #{record.cardLength,jdbcType=VARCHAR},
+      MEMO = #{record.memo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.DeployCardbins" >
+    update deploy_cardbins
+    <set >
+      <if test="bankId != null" >
+        BANK_ID = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardbin != null" >
+        CARDBIN = #{cardbin,jdbcType=VARCHAR},
+      </if>
+      <if test="cardLength != null" >
+        CARD_LENGTH = #{cardLength,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BIN_ID = #{binId,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.DeployCardbins" >
+    update deploy_cardbins
+    set BANK_ID = #{bankId,jdbcType=VARCHAR},
+      CARDBIN = #{cardbin,jdbcType=VARCHAR},
+      CARD_LENGTH = #{cardLength,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR}
+    where BIN_ID = #{binId,jdbcType=VARCHAR}
+      and TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  </update>
+</mapper>

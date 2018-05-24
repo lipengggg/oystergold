@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.AssetPaySerialMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.AssetPaySerial" >
+    <id column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="serialId" property="serialid" jdbcType="VARCHAR" />
+    <result column="vid" property="vid" jdbcType="VARCHAR" />
+    <result column="vname" property="vname" jdbcType="VARCHAR" />
+    <result column="pay_amt" property="payAmt" jdbcType="DECIMAL" />
+    <result column="request_parm" property="requestParm" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="errcode" property="errcode" jdbcType="VARCHAR" />
+    <result column="errmsg" property="errmsg" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, serialId, vid, vname, pay_amt, request_parm, status, errcode, errmsg, createtime, 
+    updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.AssetPaySerialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from asset_pay_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from asset_pay_serial
+    where pid = #{pid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from asset_pay_serial
+    where pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.AssetPaySerialExample" >
+    delete from asset_pay_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.AssetPaySerial" >
+    insert into asset_pay_serial (pid, serialId, vid, 
+      vname, pay_amt, request_parm, 
+      status, errcode, errmsg, 
+      createtime, updatetime)
+    values (#{pid,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}, #{vid,jdbcType=VARCHAR}, 
+      #{vname,jdbcType=VARCHAR}, #{payAmt,jdbcType=DECIMAL}, #{requestParm,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{errcode,jdbcType=VARCHAR}, #{errmsg,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.AssetPaySerial" >
+    insert into asset_pay_serial
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="serialid != null" >
+        serialId,
+      </if>
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="vname != null" >
+        vname,
+      </if>
+      <if test="payAmt != null" >
+        pay_amt,
+      </if>
+      <if test="requestParm != null" >
+        request_parm,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="errcode != null" >
+        errcode,
+      </if>
+      <if test="errmsg != null" >
+        errmsg,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="serialid != null" >
+        #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="vid != null" >
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="vname != null" >
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmt != null" >
+        #{payAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="requestParm != null" >
+        #{requestParm,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errcode != null" >
+        #{errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errmsg != null" >
+        #{errmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.AssetPaySerialExample" resultType="java.lang.Integer" >
+    select count(*) from asset_pay_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update asset_pay_serial
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialid != null" >
+        serialId = #{record.serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vid != null" >
+        vid = #{record.vid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vname != null" >
+        vname = #{record.vname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAmt != null" >
+        pay_amt = #{record.payAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.requestParm != null" >
+        request_parm = #{record.requestParm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errcode != null" >
+        errcode = #{record.errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errmsg != null" >
+        errmsg = #{record.errmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update asset_pay_serial
+    set pid = #{record.pid,jdbcType=VARCHAR},
+      serialId = #{record.serialid,jdbcType=VARCHAR},
+      vid = #{record.vid,jdbcType=VARCHAR},
+      vname = #{record.vname,jdbcType=VARCHAR},
+      pay_amt = #{record.payAmt,jdbcType=DECIMAL},
+      request_parm = #{record.requestParm,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      errcode = #{record.errcode,jdbcType=VARCHAR},
+      errmsg = #{record.errmsg,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.AssetPaySerial" >
+    update asset_pay_serial
+    <set >
+      <if test="serialid != null" >
+        serialId = #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="vid != null" >
+        vid = #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="vname != null" >
+        vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmt != null" >
+        pay_amt = #{payAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="requestParm != null" >
+        request_parm = #{requestParm,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errcode != null" >
+        errcode = #{errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errmsg != null" >
+        errmsg = #{errmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.AssetPaySerial" >
+    update asset_pay_serial
+    set serialId = #{serialid,jdbcType=VARCHAR},
+      vid = #{vid,jdbcType=VARCHAR},
+      vname = #{vname,jdbcType=VARCHAR},
+      pay_amt = #{payAmt,jdbcType=DECIMAL},
+      request_parm = #{requestParm,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      errcode = #{errcode,jdbcType=VARCHAR},
+      errmsg = #{errmsg,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+</mapper>

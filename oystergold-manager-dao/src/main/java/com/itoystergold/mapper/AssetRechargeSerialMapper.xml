@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.AssetRechargeSerialMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.AssetRechargeSerial" >
+    <id column="rid" property="rid" jdbcType="VARCHAR" />
+    <result column="serialId" property="serialid" jdbcType="VARCHAR" />
+    <result column="request_param" property="requestParam" jdbcType="VARCHAR" />
+    <result column="recharge_amt" property="rechargeAmt" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="errcode" property="errcode" jdbcType="VARCHAR" />
+    <result column="errmsg" property="errmsg" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="rechargetime" property="rechargetime" jdbcType="TIMESTAMP" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rid, serialId, request_param, recharge_amt, status, errcode, errmsg, operator, rechargetime, 
+    createtime, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.AssetRechargeSerialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from asset_recharge_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from asset_recharge_serial
+    where rid = #{rid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from asset_recharge_serial
+    where rid = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.AssetRechargeSerialExample" >
+    delete from asset_recharge_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.AssetRechargeSerial" >
+    insert into asset_recharge_serial (rid, serialId, request_param, 
+      recharge_amt, status, errcode, 
+      errmsg, operator, rechargetime, 
+      createtime, updatetime)
+    values (#{rid,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}, #{requestParam,jdbcType=VARCHAR}, 
+      #{rechargeAmt,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{errcode,jdbcType=VARCHAR}, 
+      #{errmsg,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{rechargetime,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.AssetRechargeSerial" >
+    insert into asset_recharge_serial
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="serialid != null" >
+        serialId,
+      </if>
+      <if test="requestParam != null" >
+        request_param,
+      </if>
+      <if test="rechargeAmt != null" >
+        recharge_amt,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="errcode != null" >
+        errcode,
+      </if>
+      <if test="errmsg != null" >
+        errmsg,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="rechargetime != null" >
+        rechargetime,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="serialid != null" >
+        #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParam != null" >
+        #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeAmt != null" >
+        #{rechargeAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errcode != null" >
+        #{errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errmsg != null" >
+        #{errmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargetime != null" >
+        #{rechargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.AssetRechargeSerialExample" resultType="java.lang.Integer" >
+    select count(*) from asset_recharge_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update asset_recharge_serial
+    <set >
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialid != null" >
+        serialId = #{record.serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestParam != null" >
+        request_param = #{record.requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeAmt != null" >
+        recharge_amt = #{record.rechargeAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errcode != null" >
+        errcode = #{record.errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errmsg != null" >
+        errmsg = #{record.errmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargetime != null" >
+        rechargetime = #{record.rechargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update asset_recharge_serial
+    set rid = #{record.rid,jdbcType=VARCHAR},
+      serialId = #{record.serialid,jdbcType=VARCHAR},
+      request_param = #{record.requestParam,jdbcType=VARCHAR},
+      recharge_amt = #{record.rechargeAmt,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=VARCHAR},
+      errcode = #{record.errcode,jdbcType=VARCHAR},
+      errmsg = #{record.errmsg,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      rechargetime = #{record.rechargetime,jdbcType=TIMESTAMP},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.AssetRechargeSerial" >
+    update asset_recharge_serial
+    <set >
+      <if test="serialid != null" >
+        serialId = #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParam != null" >
+        request_param = #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeAmt != null" >
+        recharge_amt = #{rechargeAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errcode != null" >
+        errcode = #{errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errmsg != null" >
+        errmsg = #{errmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargetime != null" >
+        rechargetime = #{rechargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.AssetRechargeSerial" >
+    update asset_recharge_serial
+    set serialId = #{serialid,jdbcType=VARCHAR},
+      request_param = #{requestParam,jdbcType=VARCHAR},
+      recharge_amt = #{rechargeAmt,jdbcType=DECIMAL},
+      status = #{status,jdbcType=VARCHAR},
+      errcode = #{errcode,jdbcType=VARCHAR},
+      errmsg = #{errmsg,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      rechargetime = #{rechargetime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+</mapper>
