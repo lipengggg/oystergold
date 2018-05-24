@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.VipuserMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.Vipuser" >
+    <id column="vid" property="vid" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="VARCHAR" />
+    <result column="vname" property="vname" jdbcType="VARCHAR" />
+    <result column="vusername" property="vusername" jdbcType="VARCHAR" />
+    <result column="vtelephone" property="vtelephone" jdbcType="VARCHAR" />
+    <result column="vlevel" property="vlevel" jdbcType="VARCHAR" />
+    <result column="vpassword" property="vpassword" jdbcType="VARCHAR" />
+    <result column="vcode" property="vcode" jdbcType="VARCHAR" />
+    <result column="vstatus" property="vstatus" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="is_parent" property="isParent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vid, parentId, vname, vusername, vtelephone, vlevel, vpassword, vcode, vstatus, createtime, 
+    updatetime, is_parent
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.VipuserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vipuser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vipuser
+    where vid = #{vid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from vipuser
+    where vid = #{vid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.VipuserExample" >
+    delete from vipuser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.Vipuser" >
+    insert into vipuser (vid, parentId, vname, 
+      vusername, vtelephone, vlevel, 
+      vpassword, vcode, vstatus, 
+      createtime, updatetime, is_parent
+      )
+    values (#{vid,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{vname,jdbcType=VARCHAR}, 
+      #{vusername,jdbcType=VARCHAR}, #{vtelephone,jdbcType=VARCHAR}, #{vlevel,jdbcType=VARCHAR}, 
+      #{vpassword,jdbcType=VARCHAR}, #{vcode,jdbcType=VARCHAR}, #{vstatus,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{isParent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.Vipuser" >
+    insert into vipuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="vname != null" >
+        vname,
+      </if>
+      <if test="vusername != null" >
+        vusername,
+      </if>
+      <if test="vtelephone != null" >
+        vtelephone,
+      </if>
+      <if test="vlevel != null" >
+        vlevel,
+      </if>
+      <if test="vpassword != null" >
+        vpassword,
+      </if>
+      <if test="vcode != null" >
+        vcode,
+      </if>
+      <if test="vstatus != null" >
+        vstatus,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="isParent != null" >
+        is_parent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="vname != null" >
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vusername != null" >
+        #{vusername,jdbcType=VARCHAR},
+      </if>
+      <if test="vtelephone != null" >
+        #{vtelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="vlevel != null" >
+        #{vlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="vpassword != null" >
+        #{vpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="vcode != null" >
+        #{vcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vstatus != null" >
+        #{vstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isParent != null" >
+        #{isParent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.VipuserExample" resultType="java.lang.Integer" >
+    select count(*) from vipuser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vipuser
+    <set >
+      <if test="record.vid != null" >
+        vid = #{record.vid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vname != null" >
+        vname = #{record.vname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vusername != null" >
+        vusername = #{record.vusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vtelephone != null" >
+        vtelephone = #{record.vtelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vlevel != null" >
+        vlevel = #{record.vlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vpassword != null" >
+        vpassword = #{record.vpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcode != null" >
+        vcode = #{record.vcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vstatus != null" >
+        vstatus = #{record.vstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isParent != null" >
+        is_parent = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vipuser
+    set vid = #{record.vid,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=VARCHAR},
+      vname = #{record.vname,jdbcType=VARCHAR},
+      vusername = #{record.vusername,jdbcType=VARCHAR},
+      vtelephone = #{record.vtelephone,jdbcType=VARCHAR},
+      vlevel = #{record.vlevel,jdbcType=VARCHAR},
+      vpassword = #{record.vpassword,jdbcType=VARCHAR},
+      vcode = #{record.vcode,jdbcType=VARCHAR},
+      vstatus = #{record.vstatus,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      is_parent = #{record.isParent,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.Vipuser" >
+    update vipuser
+    <set >
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="vname != null" >
+        vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vusername != null" >
+        vusername = #{vusername,jdbcType=VARCHAR},
+      </if>
+      <if test="vtelephone != null" >
+        vtelephone = #{vtelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="vlevel != null" >
+        vlevel = #{vlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="vpassword != null" >
+        vpassword = #{vpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="vcode != null" >
+        vcode = #{vcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vstatus != null" >
+        vstatus = #{vstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isParent != null" >
+        is_parent = #{isParent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.Vipuser" >
+    update vipuser
+    set parentId = #{parentid,jdbcType=VARCHAR},
+      vname = #{vname,jdbcType=VARCHAR},
+      vusername = #{vusername,jdbcType=VARCHAR},
+      vtelephone = #{vtelephone,jdbcType=VARCHAR},
+      vlevel = #{vlevel,jdbcType=VARCHAR},
+      vpassword = #{vpassword,jdbcType=VARCHAR},
+      vcode = #{vcode,jdbcType=VARCHAR},
+      vstatus = #{vstatus,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      is_parent = #{isParent,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+</mapper>

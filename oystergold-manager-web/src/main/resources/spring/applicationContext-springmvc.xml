@@ -26,8 +26,13 @@
 		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
 		<property name="maxUploadSize" value="5242880"></property>
 	</bean>
-	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
-	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<bean class="com.itoystergold.exception.SystemException"></bean>
+	<mvc:resources location="/assets/css/" mapping="/assets/css/**"></mvc:resources>
+	<mvc:resources location="/assets/js/" mapping="/assets/js/**"></mvc:resources>
+	<mvc:resources location="/assets/images/" mapping="/assets/images/**"></mvc:resources>
+	<mvc:resources location="/assets/avatars/" mapping="/assets/avatars/**"></mvc:resources>
+	<mvc:resources location="/assets/font/" mapping="/assets/font/**"></mvc:resources>
+	<mvc:resources location="/assets/img/" mapping="/assets/img/**"></mvc:resources>
 	<dubbo:application name="oystergold-manager"/>
 	<dubbo:registry address="${zookeeper.ip}" protocol="zookeeper"></dubbo:registry>
 	<dubbo:reference interface="com.itoystergold.service.DemoUserService" id="demoUserService"></dubbo:reference>

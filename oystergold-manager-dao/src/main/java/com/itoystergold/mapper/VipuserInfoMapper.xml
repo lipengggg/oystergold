@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itoystergold.mapper.VipuserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.itoystergold.pojo.VipuserInfo" >
+    <id column="vid" property="vid" jdbcType="VARCHAR" />
+    <result column="vcardno" property="vcardno" jdbcType="VARCHAR" />
+    <result column="bankid" property="bankid" jdbcType="VARCHAR" />
+    <result column="bankaddress" property="bankaddress" jdbcType="VARCHAR" />
+    <result column="vaddress" property="vaddress" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vid, vcardno, bankid, bankaddress, vaddress, createtime, updatetime, email
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itoystergold.pojo.VipuserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vipuser_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vipuser_info
+    where vid = #{vid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from vipuser_info
+    where vid = #{vid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itoystergold.pojo.VipuserInfoExample" >
+    delete from vipuser_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itoystergold.pojo.VipuserInfo" >
+    insert into vipuser_info (vid, vcardno, bankid, 
+      bankaddress, vaddress, createtime, 
+      updatetime, email)
+    values (#{vid,jdbcType=VARCHAR}, #{vcardno,jdbcType=VARCHAR}, #{bankid,jdbcType=VARCHAR}, 
+      #{bankaddress,jdbcType=VARCHAR}, #{vaddress,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itoystergold.pojo.VipuserInfo" >
+    insert into vipuser_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="vcardno != null" >
+        vcardno,
+      </if>
+      <if test="bankid != null" >
+        bankid,
+      </if>
+      <if test="bankaddress != null" >
+        bankaddress,
+      </if>
+      <if test="vaddress != null" >
+        vaddress,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="vcardno != null" >
+        #{vcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaddress != null" >
+        #{bankaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="vaddress != null" >
+        #{vaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itoystergold.pojo.VipuserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from vipuser_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vipuser_info
+    <set >
+      <if test="record.vid != null" >
+        vid = #{record.vid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcardno != null" >
+        vcardno = #{record.vcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankid != null" >
+        bankid = #{record.bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankaddress != null" >
+        bankaddress = #{record.bankaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vaddress != null" >
+        vaddress = #{record.vaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vipuser_info
+    set vid = #{record.vid,jdbcType=VARCHAR},
+      vcardno = #{record.vcardno,jdbcType=VARCHAR},
+      bankid = #{record.bankid,jdbcType=VARCHAR},
+      bankaddress = #{record.bankaddress,jdbcType=VARCHAR},
+      vaddress = #{record.vaddress,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      email = #{record.email,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itoystergold.pojo.VipuserInfo" >
+    update vipuser_info
+    <set >
+      <if test="vcardno != null" >
+        vcardno = #{vcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankid = #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaddress != null" >
+        bankaddress = #{bankaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="vaddress != null" >
+        vaddress = #{vaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itoystergold.pojo.VipuserInfo" >
+    update vipuser_info
+    set vcardno = #{vcardno,jdbcType=VARCHAR},
+      bankid = #{bankid,jdbcType=VARCHAR},
+      bankaddress = #{bankaddress,jdbcType=VARCHAR},
+      vaddress = #{vaddress,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      email = #{email,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+</mapper>

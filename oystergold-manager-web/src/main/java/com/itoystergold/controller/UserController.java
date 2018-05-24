@@ -9,12 +9,11 @@ import com.itoystergold.service.DemoUserService;
 @Controller
 public class UserController {
 	
-	@Autowired
-	private DemoUserService demoUserService;
 	
 	@RequestMapping("/user")
-	public void selectUser() {
+	public String selectUser() {
 		
-		System.out.println(demoUserService.selectUser());
+		/*System.out.println(demoUserService.selectUser());*/
+		return "index";
 	}
 }
